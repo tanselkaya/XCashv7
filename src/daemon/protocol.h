@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2018, The XCash Project, 2014-2017 The Monero Project
 // 
 // All rights reserved.
 // 
@@ -30,8 +30,8 @@
 
 #pragma once
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "daemon"
 
 #include "common/scoped_message_writer.h"
 

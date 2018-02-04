@@ -1,4 +1,4 @@
-// Copyright (c) 2017, The Monero Project
+// Copyright (c) 2018, The XCash Project, 2014-2017 The Monero Project
 // 
 // All rights reserved.
 // 
@@ -36,8 +36,8 @@
 #include "net/http_client.h"
 #include "download.h"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "net.dl"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "net.dl"
 
 namespace tools
 {

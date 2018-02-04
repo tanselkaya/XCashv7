@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2018, The XCash Project, 2014-2017 The Monero Project
 //
 // All rights reserved.
 //
@@ -49,15 +49,36 @@
 #include "common/stack_trace.h"
 #endif // STACK_TRACE
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace po = boost::program_options;
 namespace bf = boost::filesystem;
 
+using namespace cryptonote;
+
+void print_genesis_tx_hex() {
+
+	cryptonote::transaction tx;
+
+	//CryptoNote::AccountPublicAddress ac = boost::value_initialized<CryptoNote::AccountPublicAddress>();
+	//m_currency.constructMinerTx(0, 0, 0, 0, 0, ac, tx); // zero fee in genesis
+
+
+	//cryptonote::BinaryArray txb = cryptonote::toBinaryArray(tx);
+	//std::string tx_hex = epee::to_hex::formatted(txb);
+	//std::string tx_hex = epee::to_hex::formatted(tx);	
+		
+	//std::cout << "const char GENESIS_COINBASE_TX_HEX[] = \"" << epee::string_tools::tx_to_hex(tx) << "\";" << std::endl;
+
+	return;
+}
+
 int main(int argc, char const * argv[])
 {
   try {
+
+	  //print_genesis_tx_hex();
 
     // TODO parse the debug options like set log level right here at start
 
@@ -120,16 +141,16 @@ int main(int argc, char const * argv[])
 
     if (command_line::get_arg(vm, command_line::arg_help))
     {
-      std::cout << "Monero '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL << ENDL;
+      std::cout << "XCash '" << XCASH_RELEASE_NAME << "' (v" << XCASH_VERSION_FULL << ")" << ENDL << ENDL;
       std::cout << "Usage: " + std::string{argv[0]} + " [options|settings] [daemon_command...]" << std::endl << std::endl;
       std::cout << visible_options << std::endl;
       return 0;
     }
 
-    // Monero Version
+    // XCash Version
     if (command_line::get_arg(vm, command_line::arg_version))
     {
-      std::cout << "Monero '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL;
+      std::cout << "XCash '" << XCASH_RELEASE_NAME << "' (v" << XCASH_VERSION_FULL << ")" << ENDL;
       return 0;
     }
 
@@ -157,7 +178,7 @@ int main(int argc, char const * argv[])
     auto data_dir_arg = testnet_mode ? command_line::arg_testnet_data_dir : command_line::arg_data_dir;
 
     // data_dir
-    //   default: e.g. ~/.bitmonero/ or ~/.bitmonero/testnet
+    //   default: e.g. ~/.bitxcash/ or ~/.bitxcash/testnet
     //   if data-dir argument given:
     //     absolute path
     //     relative path: relative to cwd
@@ -276,7 +297,7 @@ int main(int argc, char const * argv[])
       tools::set_max_concurrency(command_line::get_arg(vm, daemon_args::arg_max_concurrency));
 
     // logging is now set up
-    MGINFO("Monero '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")");
+    MGINFO("XCash '" << XCASH_RELEASE_NAME << "' (v" << XCASH_VERSION_FULL << ")");
 
     MINFO("Moving from main() into the daemonize now.");
 

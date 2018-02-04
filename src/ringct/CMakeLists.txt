@@ -1,4 +1,4 @@
-# Copyright (c) 2016, The Monero Project
+# Copyright (c) 2018, The XCash Project, 2014-2017 The Monero Project
 #
 # All rights reserved.
 #
@@ -39,9 +39,9 @@ set(ringct_private_headers
   rctSigs.h
   rctTypes.h)
 
-monero_private_headers(ringct
+xcash_private_headers(ringct
   ${crypto_private_headers})
-monero_add_library(ringct
+xcash_add_library(ringct
   ${ringct_sources}
   ${ringct_headers}
   ${ringct_private_headers})

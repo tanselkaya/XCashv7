@@ -1,38 +1,38 @@
 # Monero
 
-Copyright (c) 2014-2017, The Monero Project
+Copyright (c) 2018, The XCash Project, 2014-2017 The Monero Project
 Portions Copyright (c) 2012-2013, The Cryptonote developers
 
 ## Development Resources
 
-- Web: [getmonero.org](https://getmonero.org)
-- Forum: [forum.getmonero.org](https://forum.getmonero.org)
-- Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
-- GitHub: [https://github.com/monero-project/monero](https://github.com/monero-project/monero)
-- IRC: [#monero-dev on Freenode](http://webchat.freenode.net/?randomnick=1&channels=%23monero-dev&prompt=1&uio=d4)
+- Web: [x-cash.org](https://x-cash.org)
+- Forum: [forum.x-cash.org](https://forum.x-cash.org)
+- Mail: [dev@x-cash.org](mailto:dev@x-cash.org)
+- GitHub: [https://github.com/xcash-project/xcash](https://github.com/xcash-project/xcash)
+- IRC: [#xcash-dev on Freenode](http://webchat.freenode.net/?randomnick=1&channels=%23xcash-dev&prompt=1&uio=d4)
 
 ## Build
 
 | Operating System      | Processor | Status |
 | --------------------- | -------- |--------|
-| Ubuntu 16.04          |  i686    | [![Ubuntu 16.04 i686](https://build.getmonero.org/png?builder=monero-static-ubuntu-i686)](https://build.getmonero.org/builders/monero-static-ubuntu-i686)
-| Ubuntu 16.04          |  amd64   | [![Ubuntu 16.04 amd64](https://build.getmonero.org/png?builder=monero-static-ubuntu-amd64)](https://build.getmonero.org/builders/monero-static-ubuntu-amd64)
-| Ubuntu 16.04          |  armv7   | [![Ubuntu 16.04 armv7](https://build.getmonero.org/png?builder=monero-static-ubuntu-arm7)](https://build.getmonero.org/builders/monero-static-ubuntu-arm7)
-| Debian Stable         |  armv8   | [![Debian armv8](https://build.getmonero.org/png?builder=monero-static-debian-armv8)](https://build.getmonero.org/builders/monero-static-debian-armv8)
-| OSX 10.10             |  amd64   | [![OSX 10.10 amd64](https://build.getmonero.org/png?builder=monero-static-osx-10.10)](https://build.getmonero.org/builders/monero-static-osx-10.10)
-| OSX 10.11             |  amd64   | [![OSX 10.11 amd64](https://build.getmonero.org/png?builder=monero-static-osx-10.11)](https://build.getmonero.org/builders/monero-static-osx-10.11)
-| OSX 10.12             |  amd64   | [![OSX 10.12 amd64](https://build.getmonero.org/png?builder=monero-static-osx-10.12)](https://build.getmonero.org/builders/monero-static-osx-10.12)
-| FreeBSD 11            |  amd64   | [![FreeBSD 11 amd64](https://build.getmonero.org/png?builder=monero-static-freebsd64)](https://build.getmonero.org/builders/monero-static-freebsd64)
-| DragonFly BSD 4.6     |  amd64   | [![DragonFly BSD amd64](https://build.getmonero.org/png?builder=monero-static-dragonflybsd-amd64)](https://build.getmonero.org/builders/monero-static-dragonflybsd-amd64)
-| Windows (MSYS2/MinGW) |  i686    | [![Windows (MSYS2/MinGW) i686](https://build.getmonero.org/png?builder=monero-static-win32)](https://build.getmonero.org/builders/monero-static-win32)
-| Windows (MSYS2/MinGW) |  amd64   | [![Windows (MSYS2/MinGW) amd64](https://build.getmonero.org/png?builder=monero-static-win64)](https://build.getmonero.org/builders/monero-static-win64)
+| Ubuntu 16.04          |  i686    | [![Ubuntu 16.04 i686](https://build.x-cash.org/png?builder=xcash-static-ubuntu-i686)](https://build.x-cash.org/builders/xcash-static-ubuntu-i686)
+| Ubuntu 16.04          |  amd64   | [![Ubuntu 16.04 amd64](https://build.x-cash.org/png?builder=xcash-static-ubuntu-amd64)](https://build.x-cash.org/builders/xcash-static-ubuntu-amd64)
+| Ubuntu 16.04          |  armv7   | [![Ubuntu 16.04 armv7](https://build.x-cash.org/png?builder=xcash-static-ubuntu-arm7)](https://build.x-cash.org/builders/xcash-static-ubuntu-arm7)
+| Debian Stable         |  armv8   | [![Debian armv8](https://build.x-cash.org/png?builder=xcash-static-debian-armv8)](https://build.x-cash.org/builders/xcash-static-debian-armv8)
+| OSX 10.10             |  amd64   | [![OSX 10.10 amd64](https://build.x-cash.org/png?builder=xcash-static-osx-10.10)](https://build.x-cash.org/builders/xcash-static-osx-10.10)
+| OSX 10.11             |  amd64   | [![OSX 10.11 amd64](https://build.x-cash.org/png?builder=xcash-static-osx-10.11)](https://build.x-cash.org/builders/xcash-static-osx-10.11)
+| OSX 10.12             |  amd64   | [![OSX 10.12 amd64](https://build.x-cash.org/png?builder=xcash-static-osx-10.12)](https://build.x-cash.org/builders/xcash-static-osx-10.12)
+| FreeBSD 11            |  amd64   | [![FreeBSD 11 amd64](https://build.x-cash.org/png?builder=xcash-static-freebsd64)](https://build.x-cash.org/builders/xcash-static-freebsd64)
+| DragonFly BSD 4.6     |  amd64   | [![DragonFly BSD amd64](https://build.x-cash.org/png?builder=xcash-static-dragonflybsd-amd64)](https://build.x-cash.org/builders/xcash-static-dragonflybsd-amd64)
+| Windows (MSYS2/MinGW) |  i686    | [![Windows (MSYS2/MinGW) i686](https://build.x-cash.org/png?builder=xcash-static-win32)](https://build.x-cash.org/builders/xcash-static-win32)
+| Windows (MSYS2/MinGW) |  amd64   | [![Windows (MSYS2/MinGW) amd64](https://build.x-cash.org/png?builder=xcash-static-win64)](https://build.x-cash.org/builders/xcash-static-win64)
 
 ## Coverage
 
 | Type      | Status |
 |-----------|--------|
 | Coverity  | [![Coverity Status](https://scan.coverity.com/projects/9657/badge.svg)](https://scan.coverity.com/projects/9657/)
-| Coveralls | [![Coveralls Status](https://coveralls.io/repos/github/monero-project/monero/badge.svg?branch=master)](https://coveralls.io/github/monero-project/monero?branch=master)
+| Coveralls | [![Coveralls Status](https://coveralls.io/repos/github/xcash-project/xcash/badge.svg?branch=master)](https://coveralls.io/github/xcash-project/xcash?branch=master)
 | License   | [![License](https://img.shields.io/badge/license-BSD3-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Introduction
@@ -57,7 +57,7 @@ As with many development projects, the repository on Github is considered to be 
 
 Monero development can be supported directly through donations.
 
-Both Monero and Bitcoin donations can be made to donate.getmonero.org if using a client that supports the [OpenAlias](https://openalias.org) standard
+Both Monero and Bitcoin donations can be made to donate.x-cash.org if using a client that supports the [OpenAlias](https://openalias.org) standard
 
 The Monero donation address is: `44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
 
@@ -67,13 +67,13 @@ The Bitcoin donation address is: `1KTexdemPdxSBcG55heUuTjDRYqbC5ZL8H`
 
 Core development funding and/or some supporting services are also graciously provided by sponsors:
 
-[<img width="80" src="https://static.getmonero.org/images/sponsors/mymonero.png"/>](https://mymonero.com)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
-[<img width="100" src="https://static.getmonero.org/images/sponsors/dome9.png"/>](http://dome9.com)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/araxis.png"/>](http://araxis.com)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/navicat.png"/>](http://www.navicat.com/)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/symas.png"/>](http://www.symas.com/)
+[<img width="80" src="https://static.x-cash.org/images/sponsors/myxcash.png"/>](https://myxcash.com)
+[<img width="150" src="https://static.x-cash.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
+[<img width="100" src="https://static.x-cash.org/images/sponsors/dome9.png"/>](http://dome9.com)
+[<img width="150" src="https://static.x-cash.org/images/sponsors/araxis.png"/>](http://araxis.com)
+[<img width="150" src="https://static.x-cash.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
+[<img width="150" src="https://static.x-cash.org/images/sponsors/navicat.png"/>](http://www.navicat.com/)
+[<img width="150" src="https://static.x-cash.org/images/sponsors/symas.png"/>](http://www.symas.com/)
 
 There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
 
@@ -108,28 +108,28 @@ Packages are available for
 
 * Ubuntu and [snap supported](https://snapcraft.io/docs/core/install) systems, via a community contributed build.
 
-    snap install monero --beta
+    snap install xcash --beta
 
 Installing a snap is very quick. Snaps are secure. They are isolated with all of their dependencies. Snaps also auto update when a new version is released.
 
 * Arch Linux (via [AUR](https://aur.archlinux.org/)):
-  - Stable release: [`monero`](https://aur.archlinux.org/packages/monero)
-  - Bleeding edge: [`bitmonero-git`](https://aur.archlinux.org/packages/bitmonero-git)
+  - Stable release: [`xcash`](https://aur.archlinux.org/packages/xcash)
+  - Bleeding edge: [`bitxcash-git`](https://aur.archlinux.org/packages/bitxcash-git)
 
 * OS X via [Homebrew](http://brew.sh)
 
         brew tap sammy007/cryptonight
-        brew install monero --build-from-source
+        brew install xcash --build-from-source
 
 * Docker
 
-        docker build -t monero .
+        docker build -t xcash .
      
         # either run in foreground
-        docker run -it -v /monero/chain:/root/.bitmonero -v /monero/wallet:/wallet -p 18080:18080 monero
+        docker run -it -v /xcash/chain:/root/.bitxcash -v /xcash/wallet:/wallet -p 18080:18080 xcash
 
         # or in background
-        docker run -it -d -v /monero/chain:/root/.bitmonero -v /monero/wallet:/wallet -p 18080:18080 monero
+        docker run -it -d -v /xcash/chain:/root/.bitxcash -v /xcash/wallet:/wallet -p 18080:18080 xcash
 
 Packaging for your favorite distribution would be a welcome contribution!
 
@@ -176,7 +176,7 @@ invokes cmake commands as needed.
 * Install the dependencies
 * Change to the root of the source code directory and build:
 
-        cd monero
+        cd xcash
         make
 
     *Optional*: If your machine has several cores and enough memory, enable
@@ -186,9 +186,9 @@ invokes cmake commands as needed.
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/monero/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/xcash/build/release/bin"` to `.profile`
 
-* Run Monero with `monerod --detach`
+* Run Monero with `xcashd --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -240,16 +240,16 @@ Tested on a Raspberry Pi 2 with a clean install of minimal Debian Jessie from ht
 
 * Change to the root of the source code directory and build:
 ```
-        cd monero
+        cd xcash
         make release
 ```
 * Wait ~4 hours
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/monero/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/xcash/build/release/bin"` to `.profile`
 
-* Run Monero with `monerod --detach`
+* Run Monero with `xcashd --detach`
 
 * You may wish to reduce the size of the swap file after the build has finished, and delete the boost directory from your home directory
 
@@ -304,7 +304,7 @@ application.
 
 ### On FreeBSD:
 
-The project can be built from scratch by following instructions for Linux above. If you are running monero in a jail you need to add the flag: `allow.sysvipc=1` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
+The project can be built from scratch by following instructions for Linux above. If you are running xcash in a jail you need to add the flag: `allow.sysvipc=1` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
 
 We expect to add Monero into the ports tree in the near future, which will aid in managing installations using ports or packages.
 
@@ -326,11 +326,11 @@ To build: `env CC=egcc CXX=eg++ CPP=ecpp DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/pat
 ### On Linux for Android (using docker):
 
         # Build image (select android64.Dockerfile for aarch64)
-        cd utils/build_scripts/ && docker build -f android32.Dockerfile -t monero-android .
+        cd utils/build_scripts/ && docker build -f android32.Dockerfile -t xcash-android .
         # Create container
-        docker create -it --name monero-android monero-android bash
+        docker create -it --name xcash-android xcash-android bash
         # Get binaries
-        docker cp monero-android:/opt/android/monero/build/release/bin .
+        docker cp xcash-android:/opt/android/xcash/build/release/bin .
 
 ### Building Portable Statically Linked Binaries
 
@@ -344,15 +344,15 @@ By default, in either dynamically or statically linked builds, binaries target t
 * ```make release-static-win64``` builds binaries on 64-bit Windows portable across 64-bit Windows systems
 * ```make release-static-win32``` builds binaries on 64-bit or 32-bit Windows portable across 32-bit Windows systems
 
-## Running monerod
+## Running xcashd
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in
 foreground:
 
-    ./bin/monerod
+    ./bin/xcashd
 
-To list all available options, run `./bin/monerod --help`.  Options can be
+To list all available options, run `./bin/xcashd --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -360,17 +360,17 @@ of the argument without the leading dashes, for example `log-level=1`.
 
 To run in background:
 
-    ./bin/monerod --log-file monerod.log --detach
+    ./bin/xcashd --log-file xcashd.log --detach
 
 To run as a systemd service, copy
-[monerod.service](utils/systemd/monerod.service) to `/etc/systemd/system/` and
-[monerod.conf](utils/conf/monerod.conf) to `/etc/`. The [example
-service](utils/systemd/monerod.service) assumes that the user `monero` exists
+[xcashd.service](utils/systemd/xcashd.service) to `/etc/systemd/system/` and
+[xcashd.conf](utils/conf/xcashd.conf) to `/etc/`. The [example
+service](utils/systemd/xcashd.service) assumes that the user `xcash` exists
 and its home is the data directory specified in the [example
-config](utils/conf/monerod.conf).
+config](utils/conf/xcashd.conf).
 
 If you're on Mac, you may need to add the `--max-concurrency 1` option to
-monero-wallet-cli, and possibly monerod, if you get crashes refreshing.
+xcash-wallet-cli, and possibly xcashd, if you get crashes refreshing.
 
 ## Internationalization
 
@@ -378,27 +378,27 @@ See [README.i18n.md](README.i18n.md).
 
 ## Using Tor
 
-While Monero isn't made to integrate with Tor, it can be used wrapped with torsocks, if you add --p2p-bind-ip 127.0.0.1 to the monerod command line. You also want to set DNS requests to go over TCP, so they'll be routed through Tor, by setting DNS_PUBLIC=tcp. You may also disable IGD (UPnP port forwarding negotiation), which is pointless with Tor. To allow local connections from the wallet, you might have to add TORSOCKS_ALLOW_INBOUND=1, some OSes need it and some don't. Example:
+While Monero isn't made to integrate with Tor, it can be used wrapped with torsocks, if you add --p2p-bind-ip 127.0.0.1 to the xcashd command line. You also want to set DNS requests to go over TCP, so they'll be routed through Tor, by setting DNS_PUBLIC=tcp. You may also disable IGD (UPnP port forwarding negotiation), which is pointless with Tor. To allow local connections from the wallet, you might have to add TORSOCKS_ALLOW_INBOUND=1, some OSes need it and some don't. Example:
 
-`DNS_PUBLIC=tcp torsocks monerod --p2p-bind-ip 127.0.0.1 --no-igd`
+`DNS_PUBLIC=tcp torsocks xcashd --p2p-bind-ip 127.0.0.1 --no-igd`
 
 or:
 
-`DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 torsocks monerod --p2p-bind-ip 127.0.0.1 --no-igd`
+`DNS_PUBLIC=tcp TORSOCKS_ALLOW_INBOUND=1 torsocks xcashd --p2p-bind-ip 127.0.0.1 --no-igd`
 
 TAILS ships with a very restrictive set of firewall rules. Therefore, you need to add a rule to allow this connection too, in addition to telling torsocks to allow inbound connections. Full example:
 
 `sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT`
 
-`DNS_PUBLIC=tcp torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain`
+`DNS_PUBLIC=tcp torsocks ./xcashd --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain`
 
-`./monero-wallet-cli`
+`./xcash-wallet-cli`
 
 ## Using readline
 
-While monerod and monero-wallet-cli do not use readline directly, most of the functionality can be obtained by running them via rlwrap. This allows command recall, edit capabilities, etc. It does not give autocompletion without an extra completion file, however. To use rlwrap, simply prepend `rlwrap` to the command line, eg:
+While xcashd and xcash-wallet-cli do not use readline directly, most of the functionality can be obtained by running them via rlwrap. This allows command recall, edit capabilities, etc. It does not give autocompletion without an extra completion file, however. To use rlwrap, simply prepend `rlwrap` to the command line, eg:
 
-`rlwrap bin/monero-wallet-cli --wallet-file /path/to/wallet`
+`rlwrap bin/xcash-wallet-cli --wallet-file /path/to/wallet`
 
 Note: rlwrap will save things like your seed and private keys, if you supply them on prompt. You may want to not use rlwrap when you use simplewallet to restore from seed, etc.
 
@@ -417,7 +417,7 @@ Run the build.
 Once it stalls, enter the following command:
 
 ```
-gdb /path/to/monerod `pidof monerod` 
+gdb /path/to/xcashd `pidof xcashd` 
 ```
 
 Type `thread apply all bt` within gdb in order to obtain the stack trace
@@ -428,27 +428,27 @@ Enter `ulimit -c unlimited` on the command line to enable unlimited filesizes fo
 
 Run the build.
 
-When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as monerod.
+When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as xcashd.
 
 You can now analyse this core dump with `gdb` as follows:
 
-`gdb /path/to/monerod /path/to/dumpfile`
+`gdb /path/to/xcashd /path/to/dumpfile`
 
 Print the stack trace with `bt`
 
-* To run monero within gdb:
+* To run xcash within gdb:
 
-Type `gdb /path/to/monerod`
+Type `gdb /path/to/xcashd`
 
 Pass command-line options with `--args` followed by the relevant arguments
 
-Type `run` to run monerod
+Type `run` to run xcashd
 
 ## Analysing Memory Corruption
 
 We use the tool `valgrind` for this.
 
-Run with `valgrind /path/to/monerod`. It will be slow.
+Run with `valgrind /path/to/xcashd`. It will be slow.
 
 ## LMDB
 
@@ -456,7 +456,7 @@ Instructions for debugging suspected blockchain corruption as per @HYC
 
 There is an `mdb_stat` command in the LMDB source that can print statistics about the database but it's not routinely built. This can be built with the following command:
 
-`cd ~/monero/external/db_drivers/liblmdb && make`
+`cd ~/xcash/external/db_drivers/liblmdb && make`
 
 The output of `mdb_stat -ea <path to blockchain dir>` will indicate inconsistencies in the blocks, block_heights and block_info table.
 

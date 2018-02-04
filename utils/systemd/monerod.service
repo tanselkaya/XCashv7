@@ -3,15 +3,15 @@ Description=Monero Full Node
 After=network.target
 
 [Service]
-User=monero
-Group=monero
+User=xcash
+Group=xcash
 WorkingDirectory=~
 
 Type=forking
-PIDFile=/var/run/monerod.pid
+PIDFile=/var/run/xcashd.pid
 
-ExecStart=/usr/bin/monerod --config-file /etc/monerod.conf \
-    --detach --pidfile /var/run/monerod.pid
+ExecStart=/usr/bin/xcashd --config-file /etc/xcashd.conf \
+    --detach --pidfile /var/run/xcashd.pid
 
 [Install]
 WantedBy=multi-user.target
