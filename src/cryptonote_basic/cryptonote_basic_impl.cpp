@@ -96,7 +96,7 @@ namespace cryptonote {
 
     uint64_t base_reward;
     
-    if (height < PREMINE_DURATION)
+    if ((height < PREMINE_DURATION) && (height != 0))
     {
 		base_reward = GENESIS_BLOCK_REWARD;
     }

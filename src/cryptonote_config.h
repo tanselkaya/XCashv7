@@ -79,7 +79,7 @@
 #define DIFFICULTY_CUT                                  60  // timestamps to cut after sorting
 #define DIFFICULTY_BLOCKS_COUNT                         DIFFICULTY_WINDOW + DIFFICULTY_LAG
 
-#define PREMINE_DURATION								10
+#define PREMINE_DURATION								11
 #define GENESIS_BLOCK_REWARD							((uint64_t)(4000000000000000))
 
 #define CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_SECONDS_V1   DIFFICULTY_TARGET_V1 * CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_BLOCKS
