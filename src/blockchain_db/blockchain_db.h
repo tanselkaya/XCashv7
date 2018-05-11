@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -536,6 +536,11 @@ protected:
   HardFork* m_hardfork;
 
 public:
+
+  /**
+   * @brief An empty constructor.
+   */
+  BlockchainDB(): m_open(false) { }
 
   /**
    * @brief An empty destructor.
@@ -1443,7 +1448,9 @@ public:
    *
    * @return false if the function returns false for any output, otherwise true
    */
-  virtual bool for_all_outputs(std::function<bool(uint64_t amount, const crypto::hash &tx_hash, size_t tx_idx)> f) const = 0;
+  virtual bool for_all_outputs(std::function<bool(uint64_t amount, const crypto::hash &tx_hash, uint64_t height, size_t tx_idx)> f) const = 0;
+  virtual bool for_all_outputs(uint64_t amount, const std::function<bool(uint64_t height)> &f) const = 0;
+
 
 
   //

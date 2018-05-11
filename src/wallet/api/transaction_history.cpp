@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -42,7 +42,7 @@
 
 using namespace epee;
 
-namespace Monero {
+namespace XCash {
 
 TransactionHistory::~TransactionHistory() {}
 
@@ -181,7 +181,7 @@ void TransactionHistoryImpl::refresh()
 
         // single output transaction might contain multiple transfers
         for (const auto &d: pd.m_dests) {
-            ti->m_transfers.push_back({d.amount, get_account_address_as_str(m_wallet->m_wallet->testnet(), d.is_subaddress, d.addr)});
+            ti->m_transfers.push_back({d.amount, get_account_address_as_str(m_wallet->m_wallet->nettype(), d.is_subaddress, d.addr)});
         }
         m_history.push_back(ti);
     }
@@ -245,4 +245,4 @@ void TransactionHistoryImpl::refresh()
 
 } // namespace
 
-namespace Bitmonero = Monero;
+namespace Bitxcash = XCash;

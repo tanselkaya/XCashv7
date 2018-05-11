@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -33,13 +33,29 @@
 #include "common/command_line.h"
 #include "version.h"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "debugtools.deserialize"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "debugtools.deserialize"
 
 namespace po = boost::program_options;
 using namespace epee;
 
 using namespace cryptonote;
+
+static void print_extra_fields(const std::vector<cryptonote::tx_extra_field> &fields)
+{
+  std::cout << "tx_extra has " << fields.size() << " field(s)" << std::endl;
+  for (size_t n = 0; n < fields.size(); ++n)
+  {
+    std::cout << "field " << n << ": ";
+    if (typeid(cryptonote::tx_extra_padding) == fields[n].type()) std::cout << "extra padding: " << boost::get<cryptonote::tx_extra_padding>(fields[n]).size << " bytes";
+    else if (typeid(cryptonote::tx_extra_pub_key) == fields[n].type()) std::cout << "extra pub key: " << boost::get<cryptonote::tx_extra_pub_key>(fields[n]).pub_key;
+    else if (typeid(cryptonote::tx_extra_nonce) == fields[n].type()) std::cout << "extra nonce: " << epee::string_tools::buff_to_hex_nodelimer(boost::get<cryptonote::tx_extra_nonce>(fields[n]).nonce);
+    else if (typeid(cryptonote::tx_extra_merge_mining_tag) == fields[n].type()) std::cout << "extra merge mining tag: depth " << boost::get<cryptonote::tx_extra_merge_mining_tag>(fields[n]).depth << ", merkle root " << boost::get<cryptonote::tx_extra_merge_mining_tag>(fields[n]).merkle_root;
+    else if (typeid(cryptonote::tx_extra_mysterious_minergate) == fields[n].type()) std::cout << "extra minergate custom: " << epee::string_tools::buff_to_hex_nodelimer(boost::get<cryptonote::tx_extra_mysterious_minergate>(fields[n]).data);
+    else std::cout << "unknown";
+    std::cout << std::endl;
+  }
+}
 
 int main(int argc, char* argv[])
 {
@@ -77,7 +93,7 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "Monero '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "XCash '" << XCASH_RELEASE_NAME << "' (v" << XCASH_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 1;
   }
@@ -160,23 +176,17 @@ int main(int argc, char* argv[])
 
     if (!fields.empty())
     {
-      std::cout << "tx_extra has " << fields.size() << " field(s)" << std::endl;
-      for (size_t n = 0; n < fields.size(); ++n)
-      {
-        std::cout << "field " << n << ": ";
-        if (typeid(cryptonote::tx_extra_padding) == fields[n].type()) std::cout << "extra padding: " << boost::get<cryptonote::tx_extra_padding>(fields[n]).size << " bytes";
-        else if (typeid(cryptonote::tx_extra_pub_key) == fields[n].type()) std::cout << "extra pub key: " << boost::get<cryptonote::tx_extra_pub_key>(fields[n]).pub_key;
-        else if (typeid(cryptonote::tx_extra_nonce) == fields[n].type()) std::cout << "extra nonce: " << epee::string_tools::buff_to_hex_nodelimer(boost::get<cryptonote::tx_extra_nonce>(fields[n]).nonce);
-        else if (typeid(cryptonote::tx_extra_merge_mining_tag) == fields[n].type()) std::cout << "extra merge mining tag: depth " << boost::get<cryptonote::tx_extra_merge_mining_tag>(fields[n]).depth << ", merkle root " << boost::get<cryptonote::tx_extra_merge_mining_tag>(fields[n]).merkle_root;
-        else if (typeid(cryptonote::tx_extra_mysterious_minergate) == fields[n].type()) std::cout << "extra minergate custom: " << epee::string_tools::buff_to_hex_nodelimer(boost::get<cryptonote::tx_extra_mysterious_minergate>(fields[n]).data);
-        else std::cout << "unknown";
-        std::cout << std::endl;
-      }
+      print_extra_fields(fields);
     }
     else
     {
       std::cout << "No fields were found in tx_extra" << std::endl;
     }
+  }
+  else if (cryptonote::parse_tx_extra(std::vector<uint8_t>(blob.begin(), blob.end()), fields) && !fields.empty())
+  {
+    std::cout << "Parsed tx_extra:" << std::endl;
+    print_extra_fields(fields);
   }
   else
   {

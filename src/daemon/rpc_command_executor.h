@@ -6,7 +6,7 @@
 
 */
 
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -45,8 +45,8 @@
 #include "cryptonote_basic/cryptonote_basic.h"
 #include "rpc/core_rpc_server.h"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 
@@ -105,7 +105,7 @@ public:
 
   bool print_transaction_pool_stats();
 
-  bool start_mining(cryptonote::account_public_address address, uint64_t num_threads, bool testnet, bool do_background_mining = false, bool ignore_battery = false);
+  bool start_mining(cryptonote::account_public_address address, uint64_t num_threads, cryptonote::network_type nettype, bool do_background_mining = false, bool ignore_battery = false);
 
   bool stop_mining();
 
@@ -122,7 +122,9 @@ public:
   bool set_limit(int64_t limit_down, int64_t limit_up);
 
   bool out_peers(uint64_t limit);
-  
+
+  bool in_peers(uint64_t limit);
+
   bool start_save_graph();
   
   bool stop_save_graph();

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -48,10 +48,10 @@
 #include "common/password.h"
 #include "crypto/crypto.h"  // for definition of crypto::secret_key
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "wallet.simplewallet"
-// Hardcode Monero's donation address (see #1447)
-constexpr const char MONERO_DONATION_ADDR[] = "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A";
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "wallet.simplewallet"
+// Hardcode XCash's donation address (see #1447)
+constexpr const char XCASH_DONATION_ADDR[] = "44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A";
 
 /*!
  * \namespace cryptonote
@@ -97,6 +97,7 @@ namespace cryptonote
         const boost::optional<crypto::secret_key>& spendkey, const crypto::secret_key& viewkey);
     bool new_wallet(const boost::program_options::variables_map& vm,
         const std::string &multisig_keys, const std::string &old_language);
+    bool new_wallet(const boost::program_options::variables_map& vm, const std::string& device_name);
     bool open_wallet(const boost::program_options::variables_map& vm);
     bool close_wallet();
 
@@ -132,6 +133,10 @@ namespace cryptonote
     bool set_confirm_export_overwrite(const std::vector<std::string> &args = std::vector<std::string>());
     bool set_refresh_from_block_height(const std::vector<std::string> &args = std::vector<std::string>());
     bool set_auto_low_priority(const std::vector<std::string> &args = std::vector<std::string>());
+    bool set_segregate_pre_fork_outputs(const std::vector<std::string> &args = std::vector<std::string>());
+    bool set_key_reuse_mitigation2(const std::vector<std::string> &args = std::vector<std::string>());
+    bool set_subaddress_lookahead(const std::vector<std::string> &args = std::vector<std::string>());
+    bool set_segregation_height(const std::vector<std::string> &args = std::vector<std::string>());
     bool help(const std::vector<std::string> &args = std::vector<std::string>());
     bool start_mining(const std::vector<std::string> &args);
     bool stop_mining(const std::vector<std::string> &args);
@@ -207,6 +212,12 @@ namespace cryptonote
     bool sign_multisig(const std::vector<std::string>& args);
     bool submit_multisig(const std::vector<std::string>& args);
     bool export_raw_multisig(const std::vector<std::string>& args);
+    bool print_ring(const std::vector<std::string>& args);
+    bool set_ring(const std::vector<std::string>& args);
+    bool save_known_rings(const std::vector<std::string>& args);
+    bool blackball(const std::vector<std::string>& args);
+    bool unblackball(const std::vector<std::string>& args);
+    bool blackballed(const std::vector<std::string>& args);
 
     uint64_t get_daemon_blockchain_height(std::string& err);
     bool try_connect_to_daemon(bool silent = false, uint32_t* version = nullptr);
@@ -303,6 +314,7 @@ namespace cryptonote
   private:
     std::string m_wallet_file;
     std::string m_generate_new;
+    std::string m_generate_from_device;
     std::string m_generate_from_view_key;
     std::string m_generate_from_spend_key;
     std::string m_generate_from_keys;
@@ -310,6 +322,7 @@ namespace cryptonote
     std::string m_generate_from_json;
     std::string m_mnemonic_language;
     std::string m_import_path;
+    std::string m_subaddress_lookahead;
 
     std::string m_electrum_seed;  // electrum-style seed parameter
 
@@ -322,11 +335,11 @@ namespace cryptonote
     bool m_restoring;           // are we restoring, by whatever method?
     uint64_t m_restore_height;  // optional
     bool m_do_not_relay;
+    bool m_use_english_language_names;
 
     epee::console_handlers_binder m_cmd_binder;
 
     std::unique_ptr<tools::wallet2> m_wallet;
-    epee::net_utils::http::http_simple_client m_http_client;
     refresh_progress_reporter_t m_refresh_progress_reporter;
 
     std::atomic<bool> m_idle_run;

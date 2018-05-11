@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -30,8 +30,8 @@
 
 #pragma once
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize
 {
@@ -46,9 +46,9 @@ private:
 public:
   t_protocol(
       boost::program_options::variables_map const & vm
-    , t_core & core
+    , t_core & core, bool offline = false
     )
-    : m_protocol{core.get(), nullptr}
+    : m_protocol{core.get(), nullptr, offline}
   {
     MGINFO("Initializing cryptonote protocol...");
     if (!m_protocol.init(vm))

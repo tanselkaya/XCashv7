@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -108,7 +108,7 @@ public:
    * @brief Gets a DNS address from OpenAlias format
    *
    * If the address looks good, but contains one @ symbol, replace that with a .
-   * e.g. donate@getmonero.org becomes donate.getmonero.org
+   * e.g. donate@getxcash.org becomes donate.getxcash.org
    *
    * @param oa_addr  OpenAlias address
    *
@@ -167,7 +167,7 @@ std::string get_account_address_as_str_from_url(const std::string& url, bool& dn
 
 bool load_txt_records_from_dns(std::vector<std::string> &records, const std::vector<std::string> &dns_urls);
 
-std::string parse_dns_public(const char *s);
+std::vector<std::string> parse_dns_public(const char *s);
 
 }  // namespace tools::dns_utils
 

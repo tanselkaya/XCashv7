@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2018, The Monero Project
+# Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 #
 # All rights reserved.
 #
@@ -57,9 +57,9 @@ set(wallet_api_private_headers
   subaddress_account.h
   unsigned_transaction.h)
 
-monero_private_headers(wallet_api
+xcash_private_headers(wallet_api
   ${wallet_api_private_headers})
-monero_add_library(wallet_api
+xcash_add_library(wallet_api
   ${wallet_api_sources}
   ${wallet_api_headers}
   ${wallet_api_private_headers})
@@ -69,6 +69,7 @@ target_link_libraries(wallet_api
     common
     cryptonote_core
     mnemonics
+    ${LMDB_LIBRARY}
     ${Boost_CHRONO_LIBRARY}
     ${Boost_SERIALIZATION_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}

@@ -1,8 +1,8 @@
 /// @file
-/// @author rfree (current maintainer/user in monero.cc project - most of code is from CryptoNote)
-/// @brief This is the orginal cryptonote protocol network-events handler, modified by us
+/// @author rfree (current maintainer/user in xcash.cc project - most of code is from CryptoNote)
+/// @brief This is the original cryptonote protocol network-events handler, modified by us
 
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -43,8 +43,8 @@
 #include "profile_tools.h"
 #include "net/network_throttle-detail.hpp"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "net.cn"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "net.cn"
 
 #define MLOG_P2P_MESSAGE(x) MCINFO("net.p2p.msg", context << x)
 
@@ -61,10 +61,10 @@ namespace cryptonote
 
   //-----------------------------------------------------------------------------------------------------------------------
   template<class t_core>
-    t_cryptonote_protocol_handler<t_core>::t_cryptonote_protocol_handler(t_core& rcore, nodetool::i_p2p_endpoint<connection_context>* p_net_layout):m_core(rcore),
+    t_cryptonote_protocol_handler<t_core>::t_cryptonote_protocol_handler(t_core& rcore, nodetool::i_p2p_endpoint<connection_context>* p_net_layout, bool offline):m_core(rcore),
                                                                                                               m_p2p(p_net_layout),
                                                                                                               m_syncronized_connections_count(0),
-                                                                                                              m_synchronized(false),
+                                                                                                              m_synchronized(offline),
                                                                                                               m_stopping(false)
 
   {
@@ -302,7 +302,7 @@ namespace cryptonote
     int64_t diff = static_cast<int64_t>(hshd.current_height) - static_cast<int64_t>(m_core.get_current_blockchain_height());
     uint64_t abs_diff = std::abs(diff);
     uint64_t max_block_height = std::max(hshd.current_height,m_core.get_current_blockchain_height());
-    uint64_t last_block_v1 = m_core.get_testnet() ? 624633 : 1009826;
+    uint64_t last_block_v1 = m_core.get_nettype() == TESTNET ? 624633 : m_core.get_nettype() == MAINNET ? 1009826 : (uint64_t)-1;
     uint64_t diff_v2 = max_block_height > last_block_v1 ? std::min(abs_diff, max_block_height - last_block_v1) : 0;
     MCLOG(is_inital ? el::Level::Info : el::Level::Debug, "global", context <<  "Sync data returned a new top block candidate: " << m_core.get_current_blockchain_height() << " -> " << hshd.current_height
       << " [Your node is " << abs_diff << " blocks (" << ((abs_diff - diff_v2) / (24 * 60 * 60 / DIFFICULTY_TARGET_V1)) + (diff_v2 / (24 * 60 * 60 / DIFFICULTY_TARGET_V2)) << " days) "
@@ -440,11 +440,11 @@ namespace cryptonote
       std::list<blobdata> have_tx;
       
       // Instead of requesting missing transactions by hash like BTC, 
-      // we do it by index (thanks to a suggestion from moneromooo) because
+      // we do it by index (thanks to a suggestion from xcashmooo) because
       // we're way cooler .. and also because they're smaller than hashes.
       // 
       // Also, remember to pepper some whitespace changes around to bother
-      // moneromooo ... only because I <3 him. 
+      // xcashmooo ... only because I <3 him. 
       std::vector<uint64_t> need_tx_indices;
         
       transaction tx;
@@ -484,7 +484,7 @@ namespace cryptonote
           }
           
           // hijacking m_requested objects in connection context to patch up
-          // a possible DOS vector pointed out by @monero-moo where peers keep
+          // a possible DOS vector pointed out by @xcash-moo where peers keep
           // sending (0...n-1) transactions.
           // If requested objects is not empty, then we must have asked for 
           // some missing transacionts, make sure that they're all there.
@@ -528,7 +528,7 @@ namespace cryptonote
             // future todo: 
             // tx should only not be added to pool if verification failed, but
             // maybe in the future could not be added for other reasons 
-            // according to monero-moo so keep track of these separately ..
+            // according to xcash-moo so keep track of these separately ..
             //
           }
         }
@@ -865,7 +865,7 @@ namespace cryptonote
       auto time_from_epoh = point.time_since_epoch();
       auto sec = duration_cast< seconds >( time_from_epoh ).count();*/
 
-    //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-monero/net/req-all.data", sec, get_avg_block_size());
+    //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-xcash/net/req-all.data", sec, get_avg_block_size());
 
     if(context.m_last_response_height > arg.current_blockchain_height)
     {
@@ -1333,6 +1333,15 @@ skip:
           break;
         }
 
+        // this one triggers if all threads are in standby, which should not happen,
+        // but happened at least once, so we unblock at least one thread if so
+        const boost::unique_lock<boost::mutex> sync{m_sync_lock, boost::try_to_lock};
+        if (sync.owns_lock())
+        {
+          LOG_DEBUG_CC(context, "No other thread is adding blocks, resuming");
+          break;
+        }
+
         if (should_download_next_span(context))
         {
           MDEBUG(context << " we should try for that next span too, we think we could get it faster, resuming");
@@ -1386,7 +1395,7 @@ skip:
           const uint64_t first_block_height_needed = span.first;
           const uint64_t last_block_height_needed = span.first + std::min(span.second, (uint64_t)count_limit) - 1;
           MDEBUG(context << " gap found, span: " << span.first << " - " << span.first + span.second - 1 << " (" << last_block_height_needed << ")");
-          MDEBUG(context << " current known hashes from from " << first_block_height_known << " to " << last_block_height_known);
+          MDEBUG(context << " current known hashes from " << first_block_height_known << " to " << last_block_height_known);
           if (first_block_height_needed < first_block_height_known || last_block_height_needed > last_block_height_known)
           {
             MDEBUG(context << " we are missing some of the necessary hashes for this gap, requesting chain again");
@@ -1496,7 +1505,7 @@ skip:
         context.m_last_request_time = boost::posix_time::microsec_clock::universal_time();
         LOG_PRINT_CCONTEXT_L1("-->>NOTIFY_REQUEST_GET_OBJECTS: blocks.size()=" << req.blocks.size() << ", txs.size()=" << req.txs.size()
             << "requested blocks count=" << count << " / " << count_limit << " from " << span.first << ", first hash " << req.blocks.front());
-        //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-monero/net/req-all.data", sec, get_avg_block_size());
+        //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-xcash/net/req-all.data", sec, get_avg_block_size());
 
         post_notify<NOTIFY_REQUEST_GET_OBJECTS>(req, context);
         return true;
@@ -1523,7 +1532,7 @@ skip:
 
       //std::string blob; // for calculate size of request
       //epee::serialization::store_t_to_binary(r, blob);
-      //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-monero/net/req-all.data", sec, get_avg_block_size());
+      //epee::net_utils::network_throttle_manager::get_global_throttle_inreq().logger_handle_net("log/dr-xcash/net/req-all.data", sec, get_avg_block_size());
       //LOG_PRINT_CCONTEXT_L1("r = " << 200);
 
       context.m_last_request_time = boost::posix_time::microsec_clock::universal_time();
@@ -1564,7 +1573,7 @@ skip:
     if(m_synchronized.compare_exchange_strong(val_expected, true))
     {
       MGINFO_YELLOW(ENDL << "**********************************************************************" << ENDL
-        << "You are now synchronized with the network. You may now start monero-wallet-cli." << ENDL
+        << "You are now synchronized with the network. You may now start xcash-wallet-cli." << ENDL
         << ENDL
         << "Use the \"help\" command to see the list of available commands." << ENDL
         << "**********************************************************************");

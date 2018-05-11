@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -43,7 +43,7 @@
 #include "cryptonote_basic/miner.h"
 
 #include "chaingen.h"
-
+#include "device/device.hpp"
 using namespace std;
 
 using namespace epee;
@@ -99,7 +99,7 @@ void test_generator::add_block(const cryptonote::block& blk, size_t tsx_size, st
 {
   const size_t block_size = tsx_size + get_object_blobsize(blk.miner_tx);
   uint64_t block_reward;
-  get_block_reward(misc_utils::median(block_sizes), block_size, already_generated_coins, block_reward, hf_version);
+  get_block_reward(misc_utils::median(block_sizes), block_size, already_generated_coins, block_reward, hf_version,0);
   m_blocks_info[get_block_hash(blk)] = block_info(blk.prev_id, already_generated_coins + block_reward, block_size);
 }
 
@@ -368,7 +368,7 @@ bool init_spent_output_indices(map_output_idx_t& outs, map_output_t& outs_mine, 
             crypto::public_key out_key = boost::get<txout_to_key>(oi.out).key;
             std::unordered_map<crypto::public_key, cryptonote::subaddress_index> subaddresses;
             subaddresses[from.get_keys().m_account_address.m_spend_public_key] = {0,0};
-            generate_key_image_helper(from.get_keys(), subaddresses, out_key, get_tx_pub_key_from_extra(*oi.p_tx), get_additional_tx_pub_keys_from_extra(*oi.p_tx), oi.out_no, in_ephemeral, img);
+            generate_key_image_helper(from.get_keys(), subaddresses, out_key, get_tx_pub_key_from_extra(*oi.p_tx), get_additional_tx_pub_keys_from_extra(*oi.p_tx), oi.out_no, in_ephemeral, img, hw::get_device(("default")));
 
             // lookup for this key image in the events vector
             BOOST_FOREACH(auto& tx_pair, mtx) {
@@ -521,7 +521,7 @@ bool construct_miner_tx_manually(size_t height, uint64_t already_generated_coins
                                  keypair* p_txkey/* = 0*/)
 {
   keypair txkey;
-  txkey = keypair::generate();
+  txkey = keypair::generate(hw::get_device("default"));
   add_tx_pub_key_to_extra(tx, txkey.pub);
 
   if (0 != p_txkey)
@@ -533,7 +533,7 @@ bool construct_miner_tx_manually(size_t height, uint64_t already_generated_coins
 
   // This will work, until size of constructed block is less then CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE
   uint64_t block_reward;
-  if (!get_block_reward(0, 0, already_generated_coins, block_reward, 1))
+  if (!get_block_reward(0, 0, already_generated_coins, block_reward, 1,0))
   {
     LOG_PRINT_L0("Block is too big");
     return false;

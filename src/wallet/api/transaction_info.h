@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -32,7 +32,7 @@
 #include <string>
 #include <ctime>
 
-namespace Monero {
+namespace XCash {
 
 class TransactionHistoryImpl;
 
@@ -84,4 +84,4 @@ private:
 
 } // namespace
 
-namespace Bitmonero = Monero;
+namespace Bitxcash = XCash;
