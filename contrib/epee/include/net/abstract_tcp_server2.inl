@@ -1,7 +1,7 @@
 /**
 @file
 @author from CrypoNote (see copyright below; Andrey N. Sabelnikov)
-@monero rfree
+@xcash rfree
 @brief the connection templated-class for one peer connection
 */
 // Copyright (c) 2006-2013, Andrey N. Sabelnikov, www.sabelnikov.net
@@ -51,8 +51,8 @@
 
 #include "../../../../src/cryptonote_core/cryptonote_core.h" // e.g. for the send_stop_signal()
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "net"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "net"
 
 PRAGMA_WARNING_PUSH
 namespace epee
@@ -436,7 +436,7 @@ PRAGMA_WARNING_DISABLE_VS(4355)
 					if (!all_ok) {
 						MDEBUG("do_send() DONE ***FAILED*** from packet="<<cb<<" B for ptr="<<ptr);
 						MDEBUG("do_send() SEND was aborted in middle of big package - this is mostly harmless "
-							<< " (e.g. peer closed connection) but if it causes trouble tell us at #monero-dev. " << cb);
+							<< " (e.g. peer closed connection) but if it causes trouble tell us at #xcash-dev. " << cb);
 						return false; // partial failure in sending
 					}
 					pos = pos+len;
@@ -935,6 +935,9 @@ POP_WARNINGS
         boost::bind(&boosted_tcp_server<t_protocol_handler>::handle_accept, this,
         boost::asio::placeholders::error));
 
+      boost::asio::socket_base::keep_alive opt(true);
+      conn->socket().set_option(opt);
+
       conn->start(true, 1 < m_threads_count);
       conn->save_dbg_log();
     }else
@@ -1055,7 +1058,7 @@ POP_WARNINGS
   }
   //---------------------------------------------------------------------------------
   template<class t_protocol_handler> template<class t_callback>
-  bool boosted_tcp_server<t_protocol_handler>::connect_async(const std::string& adr, const std::string& port, uint32_t conn_timeout, t_callback cb, const std::string& bind_ip)
+  bool boosted_tcp_server<t_protocol_handler>::connect_async(const std::string& adr, const std::string& port, uint32_t conn_timeout, const t_callback &cb, const std::string& bind_ip)
   {
     TRY_ENTRY();    
     connection_ptr new_connection_l(new connection<t_protocol_handler>(io_service_, m_config, m_sock_count, m_sock_number, m_pfilter, m_connection_type) );

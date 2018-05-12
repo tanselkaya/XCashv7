@@ -1,7 +1,7 @@
 /**
 @file
 @author from CrypoNote (see copyright below; Andrey N. Sabelnikov)
-@monero rfree
+@xcash rfree
 @brief the connection templated-class for one peer connection
 */
 // Copyright (c) 2006-2013, Andrey N. Sabelnikov, www.sabelnikov.net
@@ -57,8 +57,8 @@
 #include "connection_basic.hpp"
 #include "network_throttle-detail.hpp"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "net"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "net"
 
 #define ABSTRACT_SERVER_SEND_QUE_MAX_COUNT 1000
 
@@ -207,7 +207,7 @@ namespace net_utils
 
     bool connect(const std::string& adr, const std::string& port, uint32_t conn_timeot, t_connection_context& cn, const std::string& bind_ip = "0.0.0.0");
     template<class t_callback>
-    bool connect_async(const std::string& adr, const std::string& port, uint32_t conn_timeot, t_callback cb, const std::string& bind_ip = "0.0.0.0");
+    bool connect_async(const std::string& adr, const std::string& port, uint32_t conn_timeot, const t_callback &cb, const std::string& bind_ip = "0.0.0.0");
 
     typename t_protocol_handler::config_type& get_config_object(){return m_config;}
 

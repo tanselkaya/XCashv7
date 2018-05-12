@@ -30,8 +30,8 @@
 #include <boost/utility/value_init.hpp>
 #include "net/levin_base.h"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "net"
+#undef XCASH_DEFAULT_LOG_CATEGORY
+#define XCASH_DEFAULT_LOG_CATEGORY "net"
 
 namespace epee
 {
@@ -108,7 +108,7 @@ namespace epee
     }
 
     template<class t_result, class t_arg, class callback_t, class t_transport>
-    bool async_invoke_remote_command2(boost::uuids::uuid conn_id, int command, const t_arg& out_struct, t_transport& transport, callback_t cb, size_t inv_timeout = LEVIN_DEFAULT_TIMEOUT_PRECONFIGURED)
+    bool async_invoke_remote_command2(boost::uuids::uuid conn_id, int command, const t_arg& out_struct, t_transport& transport, const callback_t &cb, size_t inv_timeout = LEVIN_DEFAULT_TIMEOUT_PRECONFIGURED)
     {
       typename serialization::portable_storage stg;
       const_cast<t_arg&>(out_struct).store(stg);//TODO: add true const support to searilzation

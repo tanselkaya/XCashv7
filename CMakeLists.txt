@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2018, The Monero Project
+# Copyright (c) 2018 XCash Project, Derived from 2014-2018, The Monero Project
 #
 # All rights reserved.
 #
@@ -33,6 +33,7 @@ include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 include(CheckLinkerFlag)
 include(CheckLibraryExists)
+include(CheckFunctionExists)
 
 if (IOS)
     INCLUDE(CmakeLists_IOS.txt)
@@ -40,7 +41,7 @@ endif()
 
 cmake_minimum_required(VERSION 2.8.7)
 
-project(monero)
+project(xcash)
 
 function (die msg)
   if (NOT WIN32)
@@ -77,6 +78,22 @@ function (add_linker_flag_if_supported flag var)
   check_linker_flag(${flag} ${supported})
   if(${${supported}})
     set(${var} "${${var}} ${flag}" PARENT_SCOPE)
+  endif()
+endfunction()
+
+function (add_definition_if_function_found function var)
+  string(REPLACE "-" "_" supported ${function}_function)
+  check_function_exists(${function} ${supported})
+  if(${${supported}})
+    add_definitions("-D${var}")
+  endif()
+endfunction()
+
+function (add_definition_if_library_exists library function header var)
+  string(REPLACE "-" "_" supported ${function}_library)
+  check_library_exists(${library} ${function} ${header} ${supported})
+  if(${${supported}})
+    add_definitions("-D${var}")
   endif()
 endfunction()
 
@@ -281,7 +298,7 @@ if(SANITIZE)
 endif()
 
 # Set default blockchain storage location:
-# memory was the default in Cryptonote before Monero implimented LMDB, it still works but is unneccessary.
+# memory was the default in Cryptonote before XCash implemented LMDB, it still works but is unnecessary.
 # set(DATABASE memory)
 set(DATABASE lmdb)
 
@@ -395,6 +412,12 @@ if(STATIC AND NOT IOS)
   endif()
 endif()
 
+find_package(PCSC)
+
+add_definition_if_library_exists(c memset_s "string.h" HAVE_MEMSET_S)
+add_definition_if_library_exists(c explicit_bzero "strings.h" HAVE_EXPLICIT_BZERO)
+add_definition_if_function_found(strptime HAVE_STRPTIME)
+
 add_definitions(-DAUTO_INITIALIZE_EASYLOGGINGPP)
 
 # Generate header for embedded translations
@@ -434,6 +457,13 @@ endif()
 # Final setup for libunwind
 include_directories(${LIBUNWIND_INCLUDE})
 link_directories(${LIBUNWIND_LIBRARY_DIRS})
+
+# Final setup for libpcsc
+if (PCSC_FOUND) 
+  add_definitions(-DHAVE_PCSC)
+  include_directories(${PCSC_INCLUDE_DIR})
+  link_directories(${LIBPCSC_LIBRARY_DIRS})
+endif()
 
 if(MSVC)
   add_definitions("/bigobj /MP /W3 /GS- /D_CRT_SECURE_NO_WARNINGS /wd4996 /wd4345 /D_WIN32_WINNT=0x0600 /DWIN32_LEAN_AND_MEAN /DGTEST_HAS_TR1_TUPLE=0 /FIinline_c.h /D__SSE4_1__")
@@ -753,7 +783,7 @@ if(STATIC)
   set(Boost_USE_STATIC_LIBS ON)
   set(Boost_USE_STATIC_RUNTIME ON)
 endif()
-find_package(Boost 1.58 QUIET REQUIRED COMPONENTS system filesystem thread date_time chrono regex serialization program_options)
+find_package(Boost 1.58 QUIET REQUIRED COMPONENTS system filesystem thread date_time chrono regex serialization program_options locale)
 
 set(CMAKE_FIND_LIBRARY_SUFFIXES ${OLD_LIB_SUFFIXES})
 if(NOT Boost_FOUND)
@@ -770,6 +800,7 @@ endif()
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 if(MINGW)
   set(EXTRA_LIBRARIES mswsock;ws2_32;iphlpapi)
+  set(ICU_LIBRARIES ${Boost_LOCALE_LIBRARY} icuio icuin icuuc icudt icutu iconv)
 elseif(APPLE OR OPENBSD OR ANDROID)
   set(EXTRA_LIBRARIES "")
 elseif(FREEBSD)
@@ -867,10 +898,3 @@ option(INSTALL_VENDORED_LIBUNBOUND "Install libunbound binary built from source 
 
 
 CHECK_C_COMPILER_FLAG(-std=c11 HAVE_C11)
-
-include(CheckLibraryExists)
-include(CheckFunctionExists)
-
-check_library_exists(c memset_s "string.h" HAVE_MEMSET_S)
-check_library_exists(c explicit_bzero "strings.h" HAVE_EXPLICIT_BZERO)
-check_function_exists(strptime HAVE_STRPTIME)
